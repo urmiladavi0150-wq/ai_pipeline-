@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
-      <h1>Login to Get Your API Key</h1>
+      <h1>Login to AI Pipeline</h1>
       <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}

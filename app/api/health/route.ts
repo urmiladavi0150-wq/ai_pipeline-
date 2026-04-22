@@ -39,5 +39,11 @@ export async function GET() {
       'gemini-2.5-flash',
       'gemini-2.0-flash-001',
     ],
+  }, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
   });
 }

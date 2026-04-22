@@ -10,7 +10,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!jobId || jobId.trim() === '') {
     return NextResponse.json<ApiError>(
       { error: 'job_id query parameter is required', code: 'MISSING_JOB_ID' },
-      { status: 400 }
+      { 
+        status: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      }
     );
   }
 
@@ -19,7 +26,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!uuidRegex.test(trimmedJobId)) {
     return NextResponse.json<ApiError>(
       { error: 'job_id must be a valid UUID', code: 'INVALID_JOB_ID' },
-      { status: 400 }
+      { 
+        status: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      }
     );
   }
 
@@ -28,7 +42,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!job) {
     return NextResponse.json<ApiError>(
       { error: `No job found with id: ${jobId}`, code: 'JOB_NOT_FOUND' },
-      { status: 404 }
+      { 
+        status: 404,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
+      }
     );
   }
 
@@ -43,6 +64,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
   return NextResponse.json<JobStatusResponse>(response, {
     status: 200,
-    headers: { 'Cache-Control': 'no-store' },
+    headers: { 
+      'Cache-Control': 'no-store',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
   });
 }

@@ -1,12 +1,24 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Async AI Pipeline Backend</h1>
-      <p>API endpoints are available at:</p>
-      <ul>
-        <li><code>POST /api/create-job</code> - Create a new job</li>
-        <li><code>GET /api/job-status?job_id=&lt;id&gt;</code> - Get job status</li>
-      </ul>
-    </main>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        router.push('/dashboard');
+      } else {
+        router.push('/login');
+      }
+    };
+
+    checkUser();
+  }, [router]);
+
+  return <div>Redirecting...</div>;
 }
